@@ -9,6 +9,7 @@ const agregarAlCarrito = (producto) => {
 };
 
 const carrito = [];
+
 const productos = [
     { id: 1, titulo: "Zapa niky", precio: 999 },
     { id: 2, titulo: "Remera Puma", precio: 222 },
@@ -16,25 +17,32 @@ const productos = [
     { id: 4, titulo: "Airmax", precio: 1982 },
     { id: 5, titulo: "Jagguar", precio: 321 },
     { id: 6, titulo: "Chancla", precio: 733 },
-]
+];
 
+const productosEnOferta = [
+    { id: 1, titulo: "Zapa niky", precio: 1 },
+    { id: 2, titulo: "Remera Puma", precio: 1 },
+    { id: 3, titulo: "Pantalon Adidas", precio: 1 },
+];
 
+function generarCards(productosAMostrar){
+    let acumuladorDeCards = ``;
+    productosAMostrar.forEach(elementoDelArray => {
+        acumuladorDeCards += `<div class="card">
+            <div class="card-header">
+                ${elementoDelArray.titulo}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">$ ${elementoDelArray.precio}</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary" onclick="agregarAlCarrito()">Go somewhere</a>
+            </div>
+        </div>`;
+    });
+    return acumuladorDeCards;
+}
 
-let cardsGeneradas = ``;
-
-productos.forEach(elementoDelArray => {
-    cardsGeneradas += `<div class="card">
-        <div class="card-header">
-            ${elementoDelArray.titulo}
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">$ ${elementoDelArray.precio}</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary" onclick="agregarAlCarrito()">Go somewhere</a>
-        </div>
-    </div>`;
-})
-
+const cardsGeneradas = generarCards(productosEnOferta);
 document.write(cardsGeneradas);
 
 
