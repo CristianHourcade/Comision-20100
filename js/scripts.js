@@ -78,7 +78,6 @@ const boton = document.getElementById("boton-buscar");
 // boton.addEventListener('click', buscarProducto);
 
 // boton.onclick = buscarProducto;
-
 // $("#boton-buscar").click(() => {})
 
 function tomarValor(event){
