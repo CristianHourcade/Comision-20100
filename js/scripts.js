@@ -1,7 +1,3 @@
-const agregarAlCarrito = (producto) => {
-    carrito.push(producto);
-};
-
 const carrito = [];
 
 const productos = [
@@ -10,6 +6,15 @@ const productos = [
     { id: 3, titulo: "Pantalon Adidas", precio: 111, stock:0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg'},
     { id: 4, titulo: "Airmax", precio: 1982, stock: 56 },
 ];
+
+const agregarAlCarrito = (idProducto) => {
+    const productoAgregado = productos.find(producto => producto.id === idProducto);
+    carrito.push(productoAgregado);
+    document.getElementById("cantidad-prod").innerHTML = carrito.length;
+    // productoAgregado.stock--;
+    // actualizarStock(productoAgregado)
+};
+
 
 generarCards(productos);
 
@@ -35,8 +40,14 @@ function generarCards(productosAMostrar){
                 </div>
             </div>
             <!-- Product actions-->
-            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" >
+                <div class="text-center">
+                    <button 
+                        onclick="agregarAlCarrito(${elementoDelArray.id})"
+                        class="btn btn-outline-dark mt-auto" href="#">
+                        Add to cart
+                    </button>
+                </div>
             </div>
         </div>
     </div>`;
@@ -50,6 +61,7 @@ function mostrarCardsEnElHTML(cards) {
 
 
 function buscarProducto() {
+    console.log("Hola!")
     const nombreProductoBuscado = document.getElementById("producto-buscado").value.toUpperCase().trim();
 
     const productosEncontrados = productos.filter((producto) => {
@@ -57,4 +69,20 @@ function buscarProducto() {
     });
 
     generarCards(productosEncontrados);
+}
+
+
+//Forma 2 de escuchar un evento
+const boton = document.getElementById("boton-buscar");
+
+// boton.addEventListener('click', buscarProducto);
+
+// boton.onclick = buscarProducto;
+
+// $("#boton-buscar").click(() => {})
+
+function tomarValor(event){
+    console.log(event.target.value);    
+    // const input = document.getElementById("texto-prueba").value;
+    // console.log(input);
 }
