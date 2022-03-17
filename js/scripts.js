@@ -8,11 +8,19 @@ const productos = [
 ];
 
 const agregarAlCarrito = (idProducto) => {
+    const valorDeCantidad = document.getElementById(
+        `cantidad-${idProducto}`
+    ).value;
+        console.log(valorDeCantidad);
+    
     const productoAgregado = productos.find(producto => producto.id === idProducto);
+    productoAgregado.cantidad = valorDeCantidad;
+
     carrito.push(productoAgregado);
-    document.getElementById("cantidad-prod").innerHTML = carrito.length;
-    // productoAgregado.stock--;
-    // actualizarStock(productoAgregado)
+    document.getElementById("cantidad-prod").innerHTML = "$"+productoAgregado.precio * productoAgregado.cantidad;
+
+    // Actualizar stock
+    // Volver a generar las cards
 };
 
 
@@ -36,6 +44,7 @@ function generarCards(productosAMostrar){
                     <h5 class="fw-bolder">${elementoDelArray.titulo}</h5>
                     <!-- Product price-->
                     <span class="text-muted text-decoration-line-through">$20.00</span>
+                    <input value="1" min="1" id="cantidad-${elementoDelArray.id}" type="number" placeholder="cantidad">
                     $${elementoDelArray.precio}
                 </div>
             </div>
