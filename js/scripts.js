@@ -81,7 +81,23 @@ const boton = document.getElementById("boton-buscar");
 // $("#boton-buscar").click(() => {})
 
 function tomarValor(event){
-    console.log(event.target.value);    
+    const valorDelInput = event.target.value;
+    console.log(event.target.type);
+
+
+    if(event.target.type === "password"){
+        if(valorDelInput.length < 8) {
+            event.target.style.border = "2px solid red";
+        }else{
+            event.target.style.border = "2px solid green";
+        }
+    }else{
+        if(valorDelInput.includes("@")) {
+            event.target.style.border = "2px solid green";
+        }else{
+            event.target.style.border = "2px solid red";
+        }
+    }
     // const input = document.getElementById("texto-prueba").value;
     // console.log(input);
 }
