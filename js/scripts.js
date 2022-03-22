@@ -1,5 +1,3 @@
-const carrito = [];
-
 const productos = [
     { id: 1, titulo: "Zapa niky", precio: 999, stock:0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
     { id: 2, titulo: "Remera Puma", precio: 222, stock:32, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
@@ -11,18 +9,30 @@ const agregarAlCarrito = (idProducto) => {
     const valorDeCantidad = document.getElementById(
         `cantidad-${idProducto}`
     ).value;
-        console.log(valorDeCantidad);
     
+    // Buscando el producto a agregar
     const productoAgregado = productos.find(producto => producto.id === idProducto);
     productoAgregado.cantidad = valorDeCantidad;
 
+    // Agregando al carrito
     carrito.push(productoAgregado);
-    document.getElementById("cantidad-prod").innerHTML = "$"+productoAgregado.precio * productoAgregado.cantidad;
+
+    // Actualizando el storage del carrito
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    // Actualizando el html
+    document.getElementById("cantidad-prod").innerHTML = carrito.length;
 
     // Actualizar stock
     // Volver a generar las cards
 };
 
+const irAlProducto = (idProducto) => {
+    // Buscamos el producto
+    const productoQueQuiereVer = productos.find(producto => producto.id === idProducto);
+
+    localStorage.setItem("productoAVer", JSON.stringify(productoQueQuiereVer));
+};
 
 generarCards(productos);
 
@@ -55,6 +65,11 @@ function generarCards(productosAMostrar){
                         onclick="agregarAlCarrito(${elementoDelArray.id})"
                         class="btn btn-outline-dark mt-auto" href="#">
                         Add to cart
+                    </button>
+                    <button 
+                        onclick="irAlProducto(${elementoDelArray.id})"
+                        class="btn btn-outline-dark mt-auto" href="#">
+                        Ver producto
                     </button>
                 </div>
             </div>
