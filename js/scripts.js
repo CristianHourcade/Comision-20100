@@ -1,15 +1,23 @@
+// const storageCarrito = JSON.parse(localStorage.getItem("carrito"));
+
+// const subtotalCart = cart.reduce((acumulador, next) => acumulador + next.precio, 0);
+// console.log(`El subtotal de tu carrito es: ${subtotalCart}`);
+
 const productos = [
-    { id: 1, titulo: "Zapa niky", precio: 999, stock:0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
-    { id: 2, titulo: "Remera Puma", precio: 222, stock:32, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
-    { id: 3, titulo: "Pantalon Adidas", precio: 111, stock:0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg'},
+    { id: 1, titulo: "Zapa niky", precio: 999, stock: 0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
+    { id: 2, titulo: "Remera Puma", precio: 222, stock: 32, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
+    { id: 3, titulo: "Pantalon Adidas", precio: 111, stock: 0, imagen: 'https://estaticos-cdn.prensaiberica.es/clip/a5ee7a2a-6f63-4ab9-8986-ba83113aca56_16-9-discover-aspect-ratio_default_0.jpg' },
     { id: 4, titulo: "Airmax", precio: 1982, stock: 56 },
 ];
+
+
+
+
 
 const agregarAlCarrito = (idProducto) => {
     const valorDeCantidad = document.getElementById(
         `cantidad-${idProducto}`
     ).value;
-    
     // Buscando el producto a agregar
     const productoAgregado = productos.find(producto => producto.id === idProducto);
     productoAgregado.cantidad = valorDeCantidad;
@@ -32,13 +40,14 @@ const irAlProducto = (idProducto) => {
     const productoQueQuiereVer = productos.find(producto => producto.id === idProducto);
 
     localStorage.setItem("productoAVer", JSON.stringify(productoQueQuiereVer));
+    location.href="detalle.html";
 };
 
 generarCards(productos);
 
-function generarCards(productosAMostrar){
+function generarCards(productosAGenerar) {
     let acumuladorDeCards = ``;
-    productosAMostrar.forEach((elementoDelArray) => {
+    productosAGenerar.forEach((elementoDelArray) => {
         acumuladorDeCards += `<div class="col mb-5">
         <div class="card h-100">
             <!-- Sale badge-->
@@ -104,24 +113,42 @@ const boton = document.getElementById("boton-buscar");
 // boton.onclick = buscarProducto;
 // $("#boton-buscar").click(() => {})
 
-function tomarValor(event){
+function tomarValor(event) {
     const valorDelInput = event.target.value;
     console.log(event.target.type);
 
 
-    if(event.target.type === "password"){
-        if(valorDelInput.length < 8) {
+    if (event.target.type === "password") {
+        if (valorDelInput.length < 8) {
             event.target.style.border = "2px solid red";
-        }else{
+        } else {
             event.target.style.border = "2px solid green";
         }
-    }else{
-        if(valorDelInput.includes("@")) {
+    } else {
+        if (valorDelInput.includes("@")) {
             event.target.style.border = "2px solid green";
-        }else{
+        } else {
             event.target.style.border = "2px solid red";
         }
     }
     // const input = document.getElementById("texto-prueba").value;
     // console.log(input);
 }
+
+
+
+/***
+ * 
+ * Condicionales 9
+ * Funciones 
+ */
+
+const stock = 10;
+
+if (stock < 0) {
+    console.log("Tenemos stock");
+} else {
+    console.log("No tenemos stock");
+}
+
+// if (condicion) console.log("Tenemos stock");
